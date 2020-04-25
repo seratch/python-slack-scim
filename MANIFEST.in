@@ -1,0 +1,6 @@
+graft src
+include README.md
+include LICENSE
+prune tests
+prune json-schema
+prune logs

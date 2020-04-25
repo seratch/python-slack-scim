@@ -1,0 +1,79 @@
+{
+  "schemas": [
+    "urn:scim:schemas:core:1.0",
+    "urn:scim:schemas:extension:enterprise:1.0"
+  ],
+  "id": "W222",
+  "externalId": "",
+  "meta": {
+    "created": "2019-05-22T11:05:13-07:00",
+    "location": "https://api.slack.com/scim/v1/Users/W222"
+  },
+  "userName": "blaise.beahan",
+  "nickName": "blaise.beahan",
+  "name": {
+    "givenName": "Blaise",
+    "familyName": "Beahan",
+    "honorificPrefix": null
+  },
+  "displayName": "blaise.beahan",
+  "profileUrl": "https://awesome.enterprise.slack.com/team/blaise.beahan",
+  "title": "Total 3rd generation archive",
+  "timezone": "Asia/Tokyo",
+  "active": true,
+  "emails": [
+    {
+      "value": "blaise.beahan@example.com",
+      "primary": true
+    },
+    {
+      "value": "",
+      "primary": false
+    }
+  ],
+  "photos": [
+    {
+      "value": "https://secure.gravatar.com/avatar/5d048a9dfb54afe9c2e50fa1ba45b4b6.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0018-192.png",
+      "type": "photo"
+    }
+  ],
+  "addresses": [
+    {
+      "streetAddress": null,
+      "locality": null,
+      "region": null,
+      "postalCode": null,
+      "country": null
+    }
+  ],
+  "phoneNumbers": [
+    {
+      "value": null,
+      "type": "mobile"
+    },
+    {
+      "value": null,
+      "primary": true
+    }
+  ],
+  "userType": null,
+  "roles": [
+    {
+      "value": null,
+      "primary": true
+    }
+  ],
+  "preferredLanguage": null,
+  "locale": null,
+  "urn:scim:schemas:extension:enterprise:1.0": {
+    "employeeNumber": null,
+    "costCenter": null,
+    "organization": null,
+    "division": null,
+    "department": null,
+    "manager": {
+      "managerId": null
+    }
+  },
+  "groups": []
+}

@@ -1,0 +1,260 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/User",
+  "definitions": {
+    "User": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "nickName": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/Name"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "profileUrl": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Email"
+          }
+        },
+        "photos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Photo"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Email"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Email"
+          }
+        },
+        "urn:scim:schemas:extension:enterprise:1.0": {
+          "$ref": "#/definitions/UrnScimSchemasExtensionEnterprise1.0"
+        }
+      },
+      "required": [
+        "active",
+        "addresses",
+        "displayName",
+        "emails",
+        "externalId",
+        "groups",
+        "id",
+        "meta",
+        "name",
+        "nickName",
+        "phoneNumbers",
+        "photos",
+        "profileUrl",
+        "roles",
+        "schemas",
+        "timezone",
+        "title",
+        "urn:scim:schemas:extension:enterprise:1.0",
+        "userName"
+      ],
+      "title": "User"
+    },
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "streetAddress": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "country",
+        "locality",
+        "postalCode",
+        "primary",
+        "region",
+        "streetAddress"
+      ],
+      "title": "Address"
+    },
+    "Email": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "primary",
+        "type",
+        "value"
+      ],
+      "title": "Email"
+    },
+    "Group": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "display",
+        "value"
+      ],
+      "title": "Group"
+    },
+    "Meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ]
+        }
+      },
+      "required": [
+        "created",
+        "location"
+      ],
+      "title": "Meta"
+    },
+    "Name": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "givenName": {
+          "type": "string"
+        },
+        "familyName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "familyName",
+        "givenName"
+      ],
+      "title": "Name"
+    },
+    "Photo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ],
+      "title": "Photo"
+    },
+    "UrnScimSchemasExtensionEnterprise1.0": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "manager": {
+          "$ref": "#/definitions/Manager"
+        }
+      },
+      "required": [
+        "manager"
+      ],
+      "title": "UrnScimSchemasExtensionEnterprise1.0"
+    },
+    "Manager": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Manager"
+    }
+  }
+}

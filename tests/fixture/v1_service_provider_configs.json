@@ -1,0 +1,35 @@
+{
+  "authenticationSchemes": [
+    {
+      "type": "oauthbearertoken",
+      "name": "OAuth Bearer Token",
+      "description": "Authentication Scheme using the OAuth Bearer Token Standard",
+      "specUrl": "http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-01",
+      "primary": true
+    }
+  ],
+  "patch": {
+    "supported": true
+  },
+  "bulk": {
+    "supported": false,
+    "maxOperations": 0,
+    "maxPayloadSize": 0
+  },
+  "filter": {
+    "supported": false,
+    "maxResults": 0
+  },
+  "changePassword": {
+    "supported": false
+  },
+  "sort": {
+    "supported": false
+  },
+  "etag": {
+    "supported": false
+  },
+  "xmlDataFormat": {
+    "supported": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schemas": [
+    "urn:scim:schemas:core:1.0"
+  ],
+  "id": "W111",
+  "externalId": "",
+  "meta": {
+    "created": "2019-07-24T00:55:02-07:00",
+    "location": "https://api.slack.com/scim/v1/Users/W111"
+  },
+  "userName": "bot-user",
+  "nickName": "bot-user",
+  "name": {
+    "givenName": "bot-user",
+    "familyName": ""
+  },
+  "displayName": "",
+  "profileUrl": "https://awesome.enterprise.slack.com/team/bot-user",
+  "title": "",
+  "timezone": "America/Los_Angeles",
+  "active": true,
+  "emails": [
+    {
+      "value": "botuser-T123-A111@slack-bots.com",
+      "primary": true
+    }
+  ],
+  "photos": [
+    {
+      "value": "https://secure.gravatar.com/avatar/5d048a9dfb54afe9c2e50fa1ba45b4b6.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0018-192.png",
+      "type": "photo"
+    }
+  ],
+  "groups": []
+}

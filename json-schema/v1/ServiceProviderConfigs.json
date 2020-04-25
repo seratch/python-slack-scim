@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/ServiceProviderConfigs",
+  "definitions": {
+    "ServiceProviderConfigs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authenticationSchemes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthenticationScheme"
+          }
+        },
+        "patch": {
+          "$ref": "#/definitions/ChangePassword"
+        },
+        "bulk": {
+          "$ref": "#/definitions/Bulk"
+        },
+        "filter": {
+          "$ref": "#/definitions/Filter"
+        },
+        "changePassword": {
+          "$ref": "#/definitions/ChangePassword"
+        },
+        "sort": {
+          "$ref": "#/definitions/ChangePassword"
+        },
+        "etag": {
+          "$ref": "#/definitions/ChangePassword"
+        },
+        "xmlDataFormat": {
+          "$ref": "#/definitions/ChangePassword"
+        }
+      },
+      "required": [
+        "authenticationSchemes",
+        "bulk",
+        "changePassword",
+        "etag",
+        "filter",
+        "patch",
+        "sort",
+        "xmlDataFormat"
+      ],
+      "title": "ServiceProviderConfigs"
+    },
+    "AuthenticationScheme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "specUrl": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ]
+        },
+        "primary": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "description",
+        "name",
+        "primary",
+        "specUrl",
+        "type"
+      ],
+      "title": "AuthenticationScheme"
+    },
+    "Bulk": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported": {
+          "type": "boolean"
+        },
+        "maxOperations": {
+          "type": "integer"
+        },
+        "maxPayloadSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "maxOperations",
+        "maxPayloadSize",
+        "supported"
+      ],
+      "title": "Bulk"
+    },
+    "ChangePassword": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "supported"
+      ],
+      "title": "ChangePassword"
+    },
+    "Filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported": {
+          "type": "boolean"
+        },
+        "maxResults": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "maxResults",
+        "supported"
+      ],
+      "title": "Filter"
+    }
+  }
+}

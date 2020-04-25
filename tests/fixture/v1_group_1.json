@@ -1,0 +1,12 @@
+{
+  "schemas": [
+    "urn:scim:schemas:core:1.0"
+  ],
+  "id": "S111",
+  "displayName": "test-group-111",
+  "members": [],
+  "meta": {
+    "created": "2019-08-10T07:41:46-07:00",
+    "location": "https://api.slack.com/scim/v1/Groups/S111"
+  }
+}

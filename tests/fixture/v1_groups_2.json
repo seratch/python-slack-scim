@@ -1,0 +1,34 @@
+{
+  "totalResults": 3,
+  "itemsPerPage": 2,
+  "startIndex": 2,
+  "schemas": [
+    "urn:scim:schemas:core:1.0"
+  ],
+  "Resources": [
+    {
+      "schemas": [
+        "urn:scim:schemas:core:1.0"
+      ],
+      "id": "S222",
+      "displayName": "test-group-222",
+      "members": [],
+      "meta": {
+        "created": "2020-03-30T18:38:19-07:00",
+        "location": "https://api.slack.com/scim/v1/Groups/S222"
+      }
+    },
+    {
+      "schemas": [
+        "urn:scim:schemas:core:1.0"
+      ],
+      "id": "S333",
+      "displayName": "test-group-333",
+      "members": [],
+      "meta": {
+        "created": "2020-03-30T18:39:36-07:00",
+        "location": "https://api.slack.com/scim/v1/Groups/S333"
+      }
+    }
+  ]
+}
