@@ -103,7 +103,7 @@ client.delete_group(group_id)
 Your contributions are always welcome! Before submitting a pull request, verify your code works with Slack SCIM APIs.
 
 ```bash
-export SLACK_ADMIN_TOKEN=xoxp-***
+export SLACK_SDK_TEST_GRID_ORG_ADMIN_USER_TOKEN=xoxp-***
 SLACK_SCIM_TEST_MODE=prod python setup.py test
 ```
 
