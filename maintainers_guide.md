@@ -15,6 +15,9 @@ SLACK_SCIM_TEST_MODE=prod python setup.py test
 
 ```bash
 # https://packaging.python.org/guides/using-testpypi/
+python -m venv env
+source env/bin/activate
+pip install --upgrade pip
 pip install twine wheel
 rm -rf dist/
 python setup.py sdist bdist_wheel
