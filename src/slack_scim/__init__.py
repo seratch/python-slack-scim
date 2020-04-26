@@ -6,3 +6,5 @@ from .v1.groups import Groups
 from .v1.service_provider_configs import ServiceProviderConfigs
 from .v1.user import User
 from .v1.users import Users
+from .v1.request import SCIMRequest
+from .v1.response import SCIMResponse

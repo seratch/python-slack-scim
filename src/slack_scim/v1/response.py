@@ -28,3 +28,6 @@ class SCIMResponse():
 
     def __str__(self):
         return str(self.to_dict())
+
+    def __repr__(self):
+        return f"<slack_scim.{self.__class__.__name__}: {self.to_dict()}>"

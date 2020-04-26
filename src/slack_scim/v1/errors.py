@@ -6,8 +6,20 @@ from .response import SCIMResponse
 
 class SCIMError(Exception):
     def __init__(self, errors: Dict[str, any]):
+        """Represents a general error in this library
+
+        :param errors: Specific error information
+        """
         super()
         self.errors = errors
+
+    def to_dict(self) -> dict:
+        result: dict = {}
+        result["errors"] = self.errors
+        return result
+
+    def __repr__(self):
+        return f"<slack_scim.{self.__class__.__name__}: {self.to_dict()}>"
 
 
 class SCIMApiError(SCIMError):
@@ -18,6 +30,12 @@ class SCIMApiError(SCIMError):
         headers: Dict[str, str],
         errors: Dict[str, any],
     ):
+        """Exception representing an error returned by Slack
+
+        :param status: HTTP status code
+        :param headers: All the response headers
+        :param errors: Error messages returned by Slack
+        """
         super(SCIMApiError, self).__init__(errors)
         self.status = status
         self.headers = headers
@@ -44,3 +62,6 @@ class SCIMApiError(SCIMError):
 
     def __str__(self):
         return str(self.to_dict())
+
+    def __repr__(self):
+        return f"<slack_scim.{self.__class__.__name__}: {self.to_dict()}>"

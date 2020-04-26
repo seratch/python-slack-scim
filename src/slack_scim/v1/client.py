@@ -18,17 +18,38 @@ from .users import Users
 
 
 class SCIMClient:
-    production_base_url = "https://api.slack.com/scim/v1"
     _logger = logging.getLogger(__name__)
-    schema_values = ["urn:scim:schemas:core:1.0", "urn:scim:schemas:extension:enterprise:1.0"]
+
+    production_base_url = "https://api.slack.com/scim/v1"
+    schema_values = [
+        "urn:scim:schemas:core:1.0",
+        "urn:scim:schemas:extension:enterprise:1.0"
+    ]
 
     def __init__(
         self,
         token: str,
         base_url: str = production_base_url
     ):
+        """Slack SCIM API Client
+
+        https://api.slack.com/scim
+
+        As this class doesn't have any other state apart from the token and base_Url, if your app is fine with
+        reusing the same settings for requests, you can use an instance as singleton in your app.s
+
+        :param token: An OAuth token with the admin scope is required to access the SCIM API.
+            The simplest way to acquire this token is for an admin on a Workspace to create a new Slack app,
+            add the admin OAuth scope, install the app, and use the generated token.
+        :param base_url: the default one is the production URL. If you want to use proxy URL or test server URL,
+            Give the URL to this parameter.
+        """
         self.token: str = token
         self.base_url: str = base_url
+
+    def __repr__(self):
+        d: dict = {"token": "(redacted)", "base_url": self.base_url}
+        return f"<slack_scim.{self.__class__.__name__}: {d}>"
 
     # ----------------------------------------------
     # User Management
@@ -38,6 +59,13 @@ class SCIMClient:
         self,
         user: Union[dict, User]
     ) -> User:
+        """Creates a new user.
+
+        https://api.slack.com/scim#users
+
+        :param user: if you give a dict value here, be noted that keys must be camel-cased,
+            not your familiar snake-case style.
+        """
         req = SCIMRequest(
             token=self.token,
             http_method="POST",
@@ -55,6 +83,14 @@ class SCIMClient:
         id: str,
         user: Union[dict, User]
     ) -> User:
+        """Partially updates a user.
+
+        https://api.slack.com/scim#users
+
+        :param id: user ID
+        :param user: if you give a dict value here, be noted that keys must be camel-cased,
+            not your familiar snake-case style.
+        """
         id = self._ensure_user_id(id, user)
         req = SCIMRequest(
             token=self.token,
@@ -73,6 +109,14 @@ class SCIMClient:
         id: str,
         user: Union[dict, User],
     ) -> User:
+        """Overwrites the whole user data.
+
+        https://api.slack.com/scim#users
+
+        :param id: user ID
+        :param user: if you give a dict value here, be noted that keys must be camel-cased,
+            not your familiar snake-case style.
+        """
         id = self._ensure_user_id(id, user)
         req = SCIMRequest(
             token=self.token,
@@ -90,6 +134,12 @@ class SCIMClient:
         self,
         id: str,
     ) -> User:
+        """Deletes a user.
+
+        https://api.slack.com/scim#users
+
+        :param id: user ID
+        """
         req = SCIMRequest(
             token=self.token,
             http_method="DELETE",
@@ -103,6 +153,12 @@ class SCIMClient:
         self,
         id: str,
     ) -> User:
+        """Finds a user by user ID.
+
+        https://api.slack.com/scim#users
+
+        :param id: user ID
+        """
         req = SCIMRequest(
             token=self.token,
             http_method="GET",
@@ -121,6 +177,14 @@ class SCIMClient:
         count: int = None,
         start_index: int = None
     ) -> Users:
+        """Searches the users matching the given filter.
+
+        https://api.slack.com/scim#users
+
+        :param filter: https://api.slack.com/scim#filter
+        :param count: the number of results to return in a response
+        :param start_index: the index to fetch as the first item
+        """
         query = {}
         if filter:
             query["filter"] = filter
@@ -165,6 +229,14 @@ class SCIMClient:
         self,
         group: Union[dict, Group]
     ) -> Group:
+        """Creates a new group.
+
+        https://api.slack.com/scim#groups
+
+        :param user: if you give a dict value here, be noted that keys must be camel-cased,
+            not your familiar snake-case style.
+        """
+
         req = SCIMRequest(
             token=self.token,
             http_method="POST",
@@ -182,6 +254,14 @@ class SCIMClient:
         id: str,
         group: Union[dict, Group]
     ) -> Group:
+        """Partially updates a group.
+
+        https://api.slack.com/scim#groups
+
+        :param id: group ID
+        :param user: if you give a dict value here, be noted that keys must be camel-cased,
+            not your familiar snake-case style.
+        """
         id = self._ensure_group_id(id, group)
         req = SCIMRequest(
             token=self.token,
@@ -200,6 +280,14 @@ class SCIMClient:
         id: str,
         group: Union[dict, Group],
     ) -> Group:
+        """Overwrites the whole group.
+
+        https://api.slack.com/scim#groups
+
+        :param id: group ID
+        :param user: if you give a dict value here, be noted that keys must be camel-cased,
+            not your familiar snake-case style.
+        """
         id = self._ensure_group_id(id, group)
         req = SCIMRequest(
             token=self.token,
@@ -217,6 +305,12 @@ class SCIMClient:
         self,
         id: str,
     ) -> Group:
+        """Deletes a group.
+
+        https://api.slack.com/scim#groups
+
+        :param id: group ID
+        """
         req = SCIMRequest(
             token=self.token,
             http_method="DELETE",
@@ -230,6 +324,12 @@ class SCIMClient:
         self,
         id: str,
     ) -> Group:
+        """Finds a group by group ID.
+
+        https://api.slack.com/scim#groups
+
+        :param id: group ID
+        """
         req = SCIMRequest(
             token=self.token,
             http_method="GET",
@@ -248,6 +348,14 @@ class SCIMClient:
         count: int = None,
         start_index: int = None
     ) -> Groups:
+        """Searches the groups matching the given filter.
+
+        https://api.slack.com/scim#users
+
+        :param filter: https://api.slack.com/scim#filter
+        :param count: the number of results to return in a response
+        :param start_index: the index to fetch as the first item
+        """
         query = {}
         if filter:
             query["filter"] = filter
@@ -289,7 +397,7 @@ class SCIMClient:
     # ----------------------------------------------
 
     def get_service_provider_configs(self) -> ServiceProviderConfigs:
-        # ServiceProviderConfigs
+        """Fetches ServiceProviderConfigs"""
         req = SCIMRequest(
             token=self.token,
             http_method="GET",
@@ -306,6 +414,13 @@ class SCIMClient:
     # ----------------------------------------------
 
     def api_call(self, api_request: SCIMRequest) -> SCIMResponse:
+        """A general method to call the Slack SCIM APIs
+
+        :param api_request: API request information
+        :raise Exception: only when unexpected errors occur,
+            never raises exceptions when getting an error code
+            with unsuccessful HTTP status from Slack
+        """
         http_method = api_request.http_method.upper()
         url = api_request.url
         if api_request.query_params:
@@ -366,6 +481,7 @@ class SCIMClient:
             raise e
 
     def _to_non_null_dict(self, d: Union[dict, any]) -> dict:
+        """Recursively converts an object to dict"""
         result = {}
         if isinstance(d, dict):
             for key, value in d.items():

@@ -22,7 +22,7 @@ class SCIMRequest():
         self.json_body = json_body
 
     def to_dict(self) -> dict:
-        result: dict = {"token": "redacted"}
+        result: dict = {"token": "(redacted)"}
         result["http_method"] = self.http_method
         result["url"] = self.url
         result["headers"] = self.headers
@@ -33,3 +33,6 @@ class SCIMRequest():
 
     def __str__(self):
         return str(self.to_dict())
+
+    def __repr__(self):
+        return f"<slack_scim.{self.__class__.__name__}: {self.to_dict()}>"
