@@ -1,6 +1,6 @@
 # slack-scim - Slack SCIM API Client
 
-[![PyPI version](https://badge.fury.io/py/slack-scim.svg)](https://badge.fury.io/py/slack-scim) [![Build Status](https://travis-ci.org/seratch/pyton-slack-scim.svg?branch=master)](https://travis-ci.org/seratch/pyton-slack-scim)
+[![PyPI version](https://badge.fury.io/py/slack-scim.svg)](https://badge.fury.io/py/slack-scim) [![Build Status](https://travis-ci.org/seratch/python-slack-scim.svg?branch=master)](https://travis-ci.org/seratch/python-slack-scim)
 
 This library provides ways to call Slack's SCIM APIs in the Pythonic way.
 
