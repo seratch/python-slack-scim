@@ -1,7 +1,8 @@
 import json
+import logging
 import threading
 from http import HTTPStatus
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 from typing import Type
 from unittest import TestCase
 from urllib.parse import urlparse
@@ -9,17 +10,18 @@ from urllib.parse import urlparse
 from tests.v1 import is_prod_test_mode
 
 
-class MockHandler(BaseHTTPRequestHandler):
+class MockHandler(SimpleHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     default_request_version = "HTTP/1.1"
+    logger = logging.getLogger(__name__)
 
     def is_valid_token(self):
         return "authorization" in self.headers \
                and str(self.headers["authorization"]).startswith("Bearer xoxp-")
 
     def set_common_headers(self):
-        self.send_header("Content-Type", "application/json;charset=utf-8")
-        self.send_header("Connection", "close")
+        self.send_header("content-type", "application/json;charset=utf-8")
+        self.send_header("connection", "close")
         self.end_headers()
 
     def do_GET(self):
@@ -191,7 +193,7 @@ class MockHandler(BaseHTTPRequestHandler):
 
 class MockServerThread(threading.Thread):
 
-    def __init__(self, test: TestCase, handler: Type[BaseHTTPRequestHandler] = MockHandler):
+    def __init__(self, test: TestCase, handler: Type[SimpleHTTPRequestHandler] = MockHandler):
         threading.Thread.__init__(self)
         self.handler = handler
         self.test = test

@@ -519,7 +519,7 @@ class SCIMClient:
 
     def _debug_log_completion(self, req: Request, resp: SCIMResponse):
         if self._logger.level <= logging.DEBUG:
-            headers_part = "\n".join([f"{k}: {v}" for k, v in req.headers.items()])
+            headers_part = "\n".join([f"{k}: {v}" for k, v in resp.headers.items()])
             message = f"*** SCIM API Response ***\n" \
                       f"{req.method} {req.full_url}\n" \
                       f"{resp.status} {resp.reason}\n" \
