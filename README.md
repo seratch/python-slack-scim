@@ -9,6 +9,62 @@ This library provides ways to call Slack's SCIM APIs in the Pythonic way.
 
 ## Getting Started
 
+It's pretty easy and intuitive to use this library 😉 Try with your admin user token!
+
+```bash
+$ pip install slack-scim
+Collecting slack-scim
+  Using cached slack_scim-1.0.4-py2.py3-none-any.whl (20 kB)
+Installing collected packages: slack-scim
+Successfully installed slack-scim-1.0.4
+
+$ python
+
+>>> import os
+>>> import slack_scim
+>>> client = slack_scim.SCIMClient(token=os.environ["SLACK_ADMIN_TOKEN"])
+
+>>> import logging
+>>> logging.basicConfig(level=logging.DEBUG)
+>>> users = client.search_users(filter="restricted eq 1", count=5)
+DEBUG:slack_scim.v1.client:*** SCIM API Request ***
+GET https://api.slack.com/scim/v1/Users?filter=restricted+eq+1&count=5
+Authorization: (redacted)
+Content-type: application/x-www-form-urlencoded;charset=utf-8
+
+
+DEBUG:slack_scim.v1.client:*** SCIM API Response ***
+GET https://api.slack.com/scim/v1/Users?filter=restricted+eq+1&count=5
+200 OK
+date: Sun, 26 Apr 2020 03:53:44 GMT
+server: Apache
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+referrer-policy: no-referrer
+x-slack-backend: h
+vary: Accept-Encoding
+x-xss-protection: 0
+x-frame-options: SAMEORIGIN
+connection: close
+transfer-encoding: chunked
+content-type: application/json; charset=utf-8
+x-via: haproxy-www-4mte
+
+{"totalResults":2,"itemsPerPage":2,"startIndex":1,"schemas":["urn:scim:schemas:core:1.0"],"Resources":[{"schemas":["urn:scim:schemas:core:1.0"],"id":"WRDCW4CHX","externalId":"","meta":{"created":"2019-12-14T01:26:43-08:00","location":"https:\/\/api.slack.com\/scim\/v1\/Users\/WRDCW4CHX"},"userName":"steve","nickName":"steve","name":{"givenName":"Hiroyuki","familyName":"Aoki"},"displayName":"steve","profileUrl":"https:\/\/your-domain.enterprise.slack.com\/team\/Steve Aoki","title":"","timezone":"America\/Los_Angeles","active":true,"emails":[{"value":"saoki@example.com","primary":true}],"photos":[{"value":"https:\/\/secure.gravatar.com\/avatar\/111.jpg","type":"photo"}],"groups":[]},{"schemas":["urn:scim:schemas:core:1.0"],"id":"W0107TELUM7","externalId":"","meta":{"created":"2020-03-22T17:38:28-07:00","location":"https:\/\/api.slack.com\/scim\/v1\/Users\/W0107TELUM7"},"userName":"will.i.am","nickName":"will.i.am","name":{"givenName":"William","familyName":"Adams"},"displayName":"will.i.am","profileUrl":"https:\/\/your-domain.enterprise.slack.com\/team\/will.i.am","title":"","timezone":"America\/Los_Angeles","active":true,"emails":[{"value":"will-i-am@example.com","primary":true}],"photos":[{"value":"https:\/\/secure.gravatar.com\/avatar\/222.jpg","type":"photo"}],"groups":[]}]}
+
+>>> users.
+users.active          users.external_id     users.id              users.name            users.profile_url     users.start_index     users.to_dict(        
+users.display_name    users.from_dict(      users.items_per_page  users.nick_name       users.resources       users.timezone        users.total_results   
+users.emails          users.groups          users.meta            users.photos          users.schemas         users.title           users.user_name
+
+>>> list(map(lambda u: u.id, users.resources))
+['WRDCW4CHX', 'W0107TELUM7']
+
+>>> list(map(lambda u: u.to_dict()["name"], users.resources))
+[{'familyName': 'Aoki', 'givenName': 'Steve'}, {'familyName': 'Adams', 'givenName': 'Adams'}]
+```
+
+## Basics
+
 ### Installation
 
 ```bash
