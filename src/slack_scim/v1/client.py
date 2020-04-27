@@ -65,6 +65,8 @@ class SCIMClient:
 
         :param user: if you give a dict value here, be noted that keys must be camel-cased,
             not your familiar snake-case style.
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         req = SCIMRequest(
             token=self.token,
@@ -90,6 +92,8 @@ class SCIMClient:
         :param id: user ID
         :param user: if you give a dict value here, be noted that keys must be camel-cased,
             not your familiar snake-case style.
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         id = self._ensure_user_id(id, user)
         req = SCIMRequest(
@@ -116,6 +120,8 @@ class SCIMClient:
         :param id: user ID
         :param user: if you give a dict value here, be noted that keys must be camel-cased,
             not your familiar snake-case style.
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         id = self._ensure_user_id(id, user)
         req = SCIMRequest(
@@ -139,6 +145,8 @@ class SCIMClient:
         https://api.slack.com/scim#users
 
         :param id: user ID
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         req = SCIMRequest(
             token=self.token,
@@ -158,6 +166,8 @@ class SCIMClient:
         https://api.slack.com/scim#users
 
         :param id: user ID
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         req = SCIMRequest(
             token=self.token,
@@ -184,6 +194,8 @@ class SCIMClient:
         :param filter: https://api.slack.com/scim#filter
         :param count: the number of results to return in a response
         :param start_index: the index to fetch as the first item
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         query = {}
         if filter:
@@ -235,6 +247,8 @@ class SCIMClient:
 
         :param user: if you give a dict value here, be noted that keys must be camel-cased,
             not your familiar snake-case style.
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
 
         req = SCIMRequest(
@@ -261,6 +275,8 @@ class SCIMClient:
         :param id: group ID
         :param user: if you give a dict value here, be noted that keys must be camel-cased,
             not your familiar snake-case style.
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         id = self._ensure_group_id(id, group)
         req = SCIMRequest(
@@ -287,6 +303,8 @@ class SCIMClient:
         :param id: group ID
         :param user: if you give a dict value here, be noted that keys must be camel-cased,
             not your familiar snake-case style.
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         id = self._ensure_group_id(id, group)
         req = SCIMRequest(
@@ -310,6 +328,8 @@ class SCIMClient:
         https://api.slack.com/scim#groups
 
         :param id: group ID
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         req = SCIMRequest(
             token=self.token,
@@ -329,6 +349,8 @@ class SCIMClient:
         https://api.slack.com/scim#groups
 
         :param id: group ID
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         req = SCIMRequest(
             token=self.token,
@@ -355,6 +377,8 @@ class SCIMClient:
         :param filter: https://api.slack.com/scim#filter
         :param count: the number of results to return in a response
         :param start_index: the index to fetch as the first item
+        :return: API response
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
         """
         query = {}
         if filter:
@@ -397,7 +421,11 @@ class SCIMClient:
     # ----------------------------------------------
 
     def get_service_provider_configs(self) -> ServiceProviderConfigs:
-        """Fetches ServiceProviderConfigs"""
+        """Fetches ServiceProviderConfigs
+
+        :raise SCIMApiError: When getting an error code with unsuccessful HTTP status from Slack
+        :return: API response
+        """
         req = SCIMRequest(
             token=self.token,
             http_method="GET",
@@ -417,6 +445,7 @@ class SCIMClient:
         """A general method to call the Slack SCIM APIs
 
         :param api_request: API request information
+        :return: API response
         :raise Exception: only when unexpected errors occur,
             never raises exceptions when getting an error code
             with unsuccessful HTTP status from Slack
