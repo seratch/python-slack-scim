@@ -14,9 +14,9 @@ It's pretty easy and intuitive to use this library 😉 Try with your admin user
 ```bash
 $ pip install slack-scim
 Collecting slack-scim
-  Using cached slack_scim-1.0.4-py2.py3-none-any.whl (20 kB)
+  Using cached slack_scim-1.0.5-py2.py3-none-any.whl (20 kB)
 Installing collected packages: slack-scim
-Successfully installed slack-scim-1.0.4
+Successfully installed slack-scim-1.0.5
 
 $ python
 

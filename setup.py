@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="slack-scim",
-    version="1.0.4",
+    version="1.0.5",
     author="Kazuhiro Sera",
     author_email="seratch@gmail.com",
     description="Slack SCIM API Client",
