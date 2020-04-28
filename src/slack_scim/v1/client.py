@@ -1,12 +1,15 @@
 import copy
 import json
 import logging
+import platform
+import sys
 from http.client import HTTPResponse
 from typing import Union
 from urllib.error import HTTPError
 from urllib.parse import urlencode, quote
 from urllib.request import Request, urlopen
 
+from . import version
 from .errors import SCIMApiError, SCIMError
 from .group import Group
 from .groups import Groups
@@ -462,21 +465,24 @@ class SCIMClient:
 
         headers = copy.copy(api_request.headers)
         headers["Authorization"] = f"Bearer {api_request.token}"
+        headers["User-Agent"] = self._build_user_agent()
+
+        # The SCIM API never handles binary data
         if api_request.json_body:
             body: dict = self._to_non_null_dict(copy.copy(api_request.json_body))
-            req_body: str = None if http_method == "GET" \
-                else json.dumps(body).encode("utf-8")
+            req_body: str = None if http_method == "GET" else json.dumps(body)
             headers["Content-Type"] = "application/json;charset=utf-8"
         else:
-            req_body: str = None if http_method == "GET" \
-                else urlencode(api_request.body_params).encode("utf-8")
+            req_body: str = None if http_method == "GET" else urlencode(api_request.body_params)
             headers["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8"
+
+        req_data: bytes = req_body.encode("utf-8") if req_body else None
 
         try:
             http_request: Request = Request(
                 method=http_method,
                 url=url,
-                data=req_body,
+                data=req_data,
                 headers=headers
             )
             self._debug_log_request(http_request, req_body)
@@ -537,7 +543,7 @@ class SCIMClient:
     def _debug_log_request(self, req: Request, body: str):
         if self._logger.level <= logging.DEBUG:
             headers_part = "\n".join([
-                f"{k}: (redacted)" if k.lower() == "authorization" else f"{k}: {v}"
+                f"{k.lower()}: (redacted)" if k.lower() == "authorization" else f"{k.lower()}: {v}"
                 for k, v in req.headers.items()
             ])
             message = f"*** SCIM API Request ***\n" \
@@ -555,3 +561,10 @@ class SCIMClient:
                       f"{headers_part}\n\n" \
                       f"{resp.body or ''}\n"
             self._logger.debug(message)
+
+    def _build_user_agent(self):
+        client = "{0}/{1}".format("slack_scim", version.__version__)
+        python_version = "Python/{v.major}.{v.minor}.{v.micro}".format(v=sys.version_info)
+        system_info = "{0}/{1}".format(platform.system(), platform.release())
+        user_agent_string = " ".join([python_version, client, system_info])
+        return user_agent_string
