@@ -14,9 +14,9 @@ It's pretty easy and intuitive to use this library 😉 Try with your admin user
 ```bash
 $ pip install slack-scim
 Collecting slack-scim
-  Using cached slack_scim-1.0.5-py2.py3-none-any.whl (20 kB)
+  Using cached slack_scim-1.0.6-py2.py3-none-any.whl (20 kB)
 Installing collected packages: slack-scim
-Successfully installed slack-scim-1.0.5
+Successfully installed slack-scim-1.0.6
 
 $ python
 
@@ -26,11 +26,13 @@ $ python
 
 >>> import logging
 >>> logging.basicConfig(level=logging.DEBUG)
+
 >>> users = client.search_users(filter="restricted eq 1", count=5)
 DEBUG:slack_scim.v1.client:*** SCIM API Request ***
 GET https://api.slack.com/scim/v1/Users?filter=restricted+eq+1&count=5
-Authorization: (redacted)
-Content-type: application/x-www-form-urlencoded;charset=utf-8
+authorization: (redacted)
+user-agent: Python/3.8.2 slack_scim/1.0.6 Darwin/19.4.0
+content-type: application/x-www-form-urlencoded;charset=utf-8
 
 
 DEBUG:slack_scim.v1.client:*** SCIM API Response ***
