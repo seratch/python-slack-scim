@@ -7,6 +7,10 @@ This library provides ways to call Slack's SCIM APIs in the Pythonic way.
 * [SCIM (System for Cross-domain Identity Management)](http://www.simplecloud.info/)
 * [Slack SCIM API](https://api.slack.com/scim)
 
+## Important Notice
+
+We had critical bugs in v1.0.x series. Please use v1.1.0 or higher.
+
 ## Getting Started
 
 It's pretty easy and intuitive to use this library 😉 Try with your admin user token!
