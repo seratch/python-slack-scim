@@ -36,6 +36,11 @@ def from_bool(x: Any) -> bool:
     return x
 
 
+def from_int(x: Any) -> int:
+    assert isinstance(x, int) and not isinstance(x, bool)
+    return x
+
+
 def to_class(c: Type[T], x: Any) -> dict:
     assert isinstance(x, c)
     return cast(Any, x).to_dict()
@@ -107,6 +112,28 @@ class Email:
         result["primary"] = from_union([from_bool, from_none], self.primary)
         result["type"] = from_union([from_str, from_none], self.type)
         result["value"] = from_union([from_str, from_none], self.value)
+        return result
+
+
+class Errors:
+    code: Optional[int]
+    description: Optional[str]
+
+    def __init__(self, code: Optional[int], description: Optional[str]) -> None:
+        self.code = code
+        self.description = description
+
+    @staticmethod
+    def from_dict(obj: Any) -> 'Errors':
+        assert isinstance(obj, dict)
+        code = from_union([from_int, from_none], obj.get("code"))
+        description = from_union([from_str, from_none], obj.get("description"))
+        return Errors(code, description)
+
+    def to_dict(self) -> dict:
+        result: dict = {}
+        result["code"] = from_union([from_int, from_none], self.code)
+        result["description"] = from_union([from_str, from_none], self.description)
         return result
 
 
@@ -237,6 +264,7 @@ class User:
     addresses: Optional[List[Address]]
     display_name: Optional[str]
     emails: Optional[List[Email]]
+    errors: Optional[Errors]
     external_id: Optional[str]
     groups: Optional[List[Group]]
     id: Optional[str]
@@ -253,11 +281,12 @@ class User:
     urn_scim_schemas_extension_enterprise_10: Optional[UrnScimSchemasExtensionEnterprise10]
     user_name: Optional[str]
 
-    def __init__(self, active: Optional[bool], addresses: Optional[List[Address]], display_name: Optional[str], emails: Optional[List[Email]], external_id: Optional[str], groups: Optional[List[Group]], id: Optional[str], meta: Optional[Meta], name: Optional[Name], nick_name: Optional[str], phone_numbers: Optional[List[Email]], photos: Optional[List[Photo]], profile_url: Optional[str], roles: Optional[List[Email]], schemas: Optional[List[str]], timezone: Optional[str], title: Optional[str], urn_scim_schemas_extension_enterprise_10: Optional[UrnScimSchemasExtensionEnterprise10], user_name: Optional[str]) -> None:
+    def __init__(self, active: Optional[bool], addresses: Optional[List[Address]], display_name: Optional[str], emails: Optional[List[Email]], errors: Optional[Errors], external_id: Optional[str], groups: Optional[List[Group]], id: Optional[str], meta: Optional[Meta], name: Optional[Name], nick_name: Optional[str], phone_numbers: Optional[List[Email]], photos: Optional[List[Photo]], profile_url: Optional[str], roles: Optional[List[Email]], schemas: Optional[List[str]], timezone: Optional[str], title: Optional[str], urn_scim_schemas_extension_enterprise_10: Optional[UrnScimSchemasExtensionEnterprise10], user_name: Optional[str]) -> None:
         self.active = active
         self.addresses = addresses
         self.display_name = display_name
         self.emails = emails
+        self.errors = errors
         self.external_id = external_id
         self.groups = groups
         self.id = id
@@ -281,6 +310,7 @@ class User:
         addresses = from_union([lambda x: from_list(Address.from_dict, x), from_none], obj.get("addresses"))
         display_name = from_union([from_str, from_none], obj.get("displayName"))
         emails = from_union([lambda x: from_list(Email.from_dict, x), from_none], obj.get("emails"))
+        errors = from_union([Errors.from_dict, from_none], obj.get("Errors"))
         external_id = from_union([from_str, from_none], obj.get("externalId"))
         groups = from_union([lambda x: from_list(Group.from_dict, x), from_none], obj.get("groups"))
         id = from_union([from_str, from_none], obj.get("id"))
@@ -296,7 +326,7 @@ class User:
         title = from_union([from_str, from_none], obj.get("title"))
         urn_scim_schemas_extension_enterprise_10 = from_union([UrnScimSchemasExtensionEnterprise10.from_dict, from_none], obj.get("urn:scim:schemas:extension:enterprise:1.0"))
         user_name = from_union([from_str, from_none], obj.get("userName"))
-        return User(active, addresses, display_name, emails, external_id, groups, id, meta, name, nick_name, phone_numbers, photos, profile_url, roles, schemas, timezone, title, urn_scim_schemas_extension_enterprise_10, user_name)
+        return User(active, addresses, display_name, emails, errors, external_id, groups, id, meta, name, nick_name, phone_numbers, photos, profile_url, roles, schemas, timezone, title, urn_scim_schemas_extension_enterprise_10, user_name)
 
     def to_dict(self) -> dict:
         result: dict = {}
@@ -304,6 +334,7 @@ class User:
         result["addresses"] = from_union([lambda x: from_list(lambda x: to_class(Address, x), x), from_none], self.addresses)
         result["displayName"] = from_union([from_str, from_none], self.display_name)
         result["emails"] = from_union([lambda x: from_list(lambda x: to_class(Email, x), x), from_none], self.emails)
+        result["Errors"] = from_union([lambda x: to_class(Errors, x), from_none], self.errors)
         result["externalId"] = from_union([from_str, from_none], self.external_id)
         result["groups"] = from_union([lambda x: from_list(lambda x: to_class(Group, x), x), from_none], self.groups)
         result["id"] = from_union([from_str, from_none], self.id)

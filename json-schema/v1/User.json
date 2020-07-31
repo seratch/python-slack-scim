@@ -6,6 +6,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "Errors": {
+          "$ref": "#/definitions/Errors"
+        },
         "schemas": {
           "type": "array",
           "items": {
@@ -90,6 +93,7 @@
         }
       },
       "required": [
+        "Errors",
         "active",
         "addresses",
         "displayName",
@@ -111,6 +115,23 @@
         "userName"
       ],
       "title": "User"
+    },
+    "Errors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "code",
+        "description"
+      ],
+      "title": "Errors"
     },
     "Address": {
       "type": "object",

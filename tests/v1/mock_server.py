@@ -56,6 +56,9 @@ class MockHandler(SimpleHTTPRequestHandler):
             elif parsed_path.path == "/Groups/S222":
                 with open("tests/fixture/v1_group_2.json") as f:
                     body = f.read()
+            elif parsed_path.path == "/Groups/S333":
+                with open("tests/fixture/v1_group_3.json") as f:
+                    body = f.read()
             else:
                 body = "{}"
             self.send_response(HTTPStatus.OK)

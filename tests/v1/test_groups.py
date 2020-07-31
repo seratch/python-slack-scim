@@ -82,3 +82,11 @@ class TestGroups(unittest.TestCase):
                 self.client.delete_group(group_id)
         finally:
             self.client.delete_user(created_user.id)
+
+    def test_read_group_members(self):
+        group = self.client.read_group("S333")
+        assert len(group.members) == 1
+        member = group.members[0]
+        print(member.__dict__)
+        assert member.value == "M333"
+        assert member.display == "Michael Jackson"

@@ -20,7 +20,7 @@ setuptools.setup(
     package_dir={"": "src"},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     setup_requires=["pytest-runner==5.2"],
-    tests_require=["pytest==3.8.2"],
+    tests_require=["pytest>=5,<6"],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",

@@ -1,0 +1,17 @@
+{
+  "schemas": [
+    "urn:scim:schemas:core:1.0"
+  ],
+  "id": "S333",
+  "displayName": "test-group-333",
+  "members": [
+    {
+      "value": "M333",
+      "display": "Michael Jackson"
+    }
+  ],
+  "meta": {
+    "created": "2019-03-18T09:05:06-07:00",
+    "location": "https:\/\/api.slack.com\/scim\/v1\/Groups\/S333"
+  }
+}
