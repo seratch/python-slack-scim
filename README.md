@@ -9,7 +9,7 @@ This library provides ways to call Slack's SCIM APIs in the Pythonic way.
 
 ## Important Notice
 
-We had critical bugs in v1.0.x series. Please use v1.1.0 or higher.
+This library had critical bugs in v1.0.x series. Please use v1.1.0 or higher.
 
 ## Getting Started
 
