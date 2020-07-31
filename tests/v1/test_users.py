@@ -37,7 +37,7 @@ class TestUsers(unittest.TestCase):
         assert user.name.given_name is not None
 
         read_result: User = self.client.read_user(user.id)
-        assert user.to_dict() == read_result.to_dict()
+        assert user.id == read_result.id
 
         search_result: Users = self.client.search_users(count=2, start_index=2)
         assert search_result.start_index == 2

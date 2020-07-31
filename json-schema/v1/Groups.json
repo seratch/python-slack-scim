@@ -6,27 +6,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "schemas": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "members": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GroupsMember"
-          }
-        },
-        "meta": {
-          "$ref": "#/definitions/Meta"
-        },
         "totalResults": {
           "type": "integer"
         },
@@ -36,25 +15,48 @@
         "startIndex": {
           "type": "integer"
         },
+        "schemas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "Resources": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Resource"
           }
+        },
+        "Errors": {
+          "$ref": "#/definitions/Errors"
         }
       },
       "required": [
+        "Errors",
         "Resources",
-        "displayName",
-        "id",
         "itemsPerPage",
-        "members",
-        "meta",
         "schemas",
         "startIndex",
         "totalResults"
       ],
       "title": "Groups"
+    },
+    "Errors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "code",
+        "description"
+      ],
+      "title": "Errors"
     },
     "Resource": {
       "type": "object",
@@ -75,7 +77,7 @@
         "members": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceMember"
+            "$ref": "#/definitions/Member"
           }
         },
         "meta": {
@@ -91,174 +93,7 @@
       ],
       "title": "Resource"
     },
-    "ResourceMember": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "schemas": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string"
-        },
-        "externalId": {
-          "type": "string"
-        },
-        "meta": {
-          "$ref": "#/definitions/Meta"
-        },
-        "userName": {
-          "type": "string"
-        },
-        "nickName": {
-          "type": "string"
-        },
-        "name": {
-          "$ref": "#/definitions/Name"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "profileUrl": {
-          "type": "string"
-        },
-        "userType": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "preferredLanguage": {
-          "type": "string"
-        },
-        "locale": {
-          "type": "string"
-        },
-        "timezone": {
-          "type": "string"
-        },
-        "active": {
-          "type": "boolean"
-        },
-        "password": {
-          "type": "string"
-        },
-        "urn:scim:schemas:extension:enterprise:1.0": {
-          "$ref": "#/definitions/UrnScimSchemasExtensionEnterprise1.0"
-        }
-      },
-      "required": [
-        "active",
-        "displayName",
-        "externalId",
-        "id",
-        "locale",
-        "meta",
-        "name",
-        "nickName",
-        "password",
-        "preferredLanguage",
-        "profileUrl",
-        "schemas",
-        "timezone",
-        "title",
-        "urn:scim:schemas:extension:enterprise:1.0",
-        "userName",
-        "userType"
-      ],
-      "title": "ResourceMember"
-    },
-    "Meta": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "created": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string",
-          "qt-uri-protocols": [
-            "https"
-          ]
-        }
-      },
-      "required": [
-        "created",
-        "location"
-      ],
-      "title": "Meta"
-    },
-    "Name": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "givenName": {
-          "type": "string"
-        },
-        "familyName": {
-          "type": "string"
-        },
-        "honorificPrefix": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "familyName",
-        "givenName",
-        "honorificPrefix"
-      ],
-      "title": "Name"
-    },
-    "UrnScimSchemasExtensionEnterprise1.0": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "employeeNumber": {
-          "type": "string"
-        },
-        "costCenter": {
-          "type": "string"
-        },
-        "organization": {
-          "type": "string"
-        },
-        "division": {
-          "type": "string"
-        },
-        "department": {
-          "type": "string"
-        },
-        "manager": {
-          "$ref": "#/definitions/Manager"
-        }
-      },
-      "required": [
-        "costCenter",
-        "department",
-        "division",
-        "employeeNumber",
-        "manager",
-        "organization"
-      ],
-      "title": "UrnScimSchemasExtensionEnterprise1.0"
-    },
-    "Manager": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "managerId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "managerId"
-      ],
-      "title": "Manager"
-    },
-    "GroupsMember": {
+    "Member": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -273,7 +108,28 @@
         "display",
         "value"
       ],
-      "title": "GroupsMember"
+      "title": "Member"
+    },
+    "Meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ]
+        }
+      },
+      "required": [
+        "created",
+        "location"
+      ],
+      "title": "Meta"
     }
   }
 }
