@@ -11,9 +11,21 @@ This library provides ways to call Slack's SCIM APIs in the Pythonic way.
 
 This library had critical bugs in v1.0.x series. Please use v1.1.0 or higher.
 
+## Prerequisites: Having Owner Access and Getting an API Token
+
+In order to use this library, you need to be an owner of the workspace, and obtain an API token.
+
+As explained in [the official Slack SCIM API documentation](https://api.slack.com/scim#access), the easiest way to obtain a valid token for the purposes of SCIM provisioning is as follows:
+1. As *a Workspace/Organization Owner*, create [a new app for your workspace](https://api.slack.com/apps?new_app=1) (see [here](https://api.slack.com/start/overview#creating) for the documentation).
+2. Add the `admin` OAuth scope to [the "User Token Scopes" section](https://api.slack.com/authentication/quickstart#configuring).
+3. Install the app to your workspace (see [here](https://api.slack.com/start/overview#installing_distributing) for the documentation).
+4. Use the generated token (if you are provided with multiple tokens, use the "OAuth Access Token" not the "Bot User OAuth Access Token").
+
+Note that you can easily *reinstall your app* with different permissions if it turns out you did not select all the necessary permissions.
+
 ## Getting Started
 
-It's pretty easy and intuitive to use this library 😉 Try with your admin user token!
+It's pretty easy and intuitive to use this library 😉 Try with the OAuth Access Token you've created in the previous subsection:
 
 ```bash
 $ pip install slack-scim
